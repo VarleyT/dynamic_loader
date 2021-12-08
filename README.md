@@ -15,7 +15,7 @@
 - /source/app/dl_time_lib.c 对于app程序调用到的C库time.h中的函数进行重定向
 
 - /source/host/dl_arch.c 用于进行代码数据重定向与cache刷新，与芯片架构有关
-- /source/host/dl_elf.h elf文件内容描述
+- /source/host/dl_elf.h 用于elf格式文件解码
 - /source/host/dl_lib.c 动态加载实现源码
 - /source/host/dl_lib.h 动态加载供给应用程序使用的函数
 - /source/host/dl_port.c 动态加载主机底层需要实现的函数接口，移植时主要修改的文件
