@@ -4,7 +4,7 @@
 本项目是一个在单片机（如：STM32）上实现动态加载功能的函数库，与Windows中的dll，Linux中的so类似，可以将代码动态地从其他的存储介质，动态加载到RAM中
 
 #### 软件架构
-本项目文件夹有两个app_project存储了用于生成app程序镜像的工程文件，source提供了app工程与host工程所需要的所有工程文件，/source/app为app工程所需要的程序源码，/source/host存储里host工程的程序源码，/source/common存储了app与host工程需要用到的公共头文件，文件的主要功能如下：
+本项目文件夹有两个，其中app_project存储了用于生成app程序镜像的工程文件，source提供了app工程与host工程所需要的所有工程文件，/source/app为app工程所需要的程序源码，/source/host存储里host工程的程序源码，/source/common存储了app与host工程需要用到的公共头文件，文件的主要功能如下：
 - /source/common/dl_extern_lib.h 描述了app程序用于调用host程序的函数向量表的基地址，以及相关的一些宏定义
 - /source/common/dl_stdio_lib.h 描述了app程序调用C库stdio.h中函数时，对应的函数在函数向量表中的索引
 - /source/common/dl_stdlib_lib.h 描述了app程序调用C库stdlib.h中函数时，对应的函数在函数向量表中的索引
