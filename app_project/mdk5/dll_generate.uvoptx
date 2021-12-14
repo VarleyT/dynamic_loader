@@ -202,7 +202,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>D:\My_File\Comon_Project\STM32H7_RTX5\USE_LIB\dynamic_load\app\dl_stdio_lib.c</PathWithFileName>
+      <PathWithFileName>..\..\source\app\dl_stdio_lib.c</PathWithFileName>
       <FilenameWithoutPath>dl_stdio_lib.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -214,7 +214,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>D:\My_File\Comon_Project\STM32H7_RTX5\USE_LIB\dynamic_load\app\dl_stdlib_lib.c</PathWithFileName>
+      <PathWithFileName>..\..\source\app\dl_stdlib_lib.c</PathWithFileName>
       <FilenameWithoutPath>dl_stdlib_lib.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -226,7 +226,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>D:\My_File\Comon_Project\STM32H7_RTX5\USE_LIB\dynamic_load\app\dl_time_lib.c</PathWithFileName>
+      <PathWithFileName>..\..\source\app\dl_time_lib.c</PathWithFileName>
       <FilenameWithoutPath>dl_time_lib.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

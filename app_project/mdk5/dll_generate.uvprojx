@@ -400,17 +400,17 @@
             <File>
               <FileName>dl_stdio_lib.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\My_File\Comon_Project\STM32H7_RTX5\USE_LIB\dynamic_load\app\dl_stdio_lib.c</FilePath>
+              <FilePath>..\..\source\app\dl_stdio_lib.c</FilePath>
             </File>
             <File>
               <FileName>dl_stdlib_lib.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\My_File\Comon_Project\STM32H7_RTX5\USE_LIB\dynamic_load\app\dl_stdlib_lib.c</FilePath>
+              <FilePath>..\..\source\app\dl_stdlib_lib.c</FilePath>
             </File>
             <File>
               <FileName>dl_time_lib.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\My_File\Comon_Project\STM32H7_RTX5\USE_LIB\dynamic_load\app\dl_time_lib.c</FilePath>
+              <FilePath>..\..\source\app\dl_time_lib.c</FilePath>
             </File>
           </Files>
         </Group>
