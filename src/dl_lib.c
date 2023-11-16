@@ -1,9 +1,9 @@
 /*
-*   @File name: dl_lib.h
-*   @Author: wzh
-*   @Version: 1.0
-*   @Date: 2021-12-3
-*   @Description: 动态加载实现源码
+*   @file  dl_lib.h
+*   @author wzh
+*   @version 1.0
+*   @date 2021-12-3
+*   @description  动态加载实现源码
 */
 #include "dl_lib.h"
 #include "dl_elf.h"
