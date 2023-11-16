@@ -1,10 +1,10 @@
 /*
-*   @File name: dl_port.c
-*   @Author: wzh
-*   @Version: 1.0
-*   @Date: 2021-12-3
-*   @Description: 与硬件相关的底层函数接口
-*   @Todo	此处的函数原型需要自己提供
+*   @file  dl_port.c
+*   @author  wzh
+*   @version 1.0
+*   @date 2021-12-3
+*   @description 与硬件相关的底层函数接口
+*   @detail	此处的函数原型需要自己提供
 */
 #include "dl_port.h"
 #include "ff.h"
