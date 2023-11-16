@@ -1,9 +1,9 @@
 /*
-*   @File name: dl_vector.c
-*   @Author: wzh
-*   @Version: 1.0
-*   @Date: 2021-12-3
-*   @Description: 用于创建主程序与子程序可以共同访问的一块内存，主要用于存储主程序一些函数的函数地址
+*   @file  dl_vector.c
+*   @author  wzh
+*   @version  1.0
+*   @date 2021-12-3
+*   @description  用于创建主程序与子程序可以共同访问的一块内存，主要用于存储主程序一些函数的函数地址
 *                 使得子程序可以调用主程序的函数
 */
 #include "dl_lib.h"
