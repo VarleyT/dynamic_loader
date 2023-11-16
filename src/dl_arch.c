@@ -1,10 +1,10 @@
 /*
-*   @File name: dl_arch.c
-*   @Author: wzh
-*   @Version: 1.0
-*   @Date: 2021-12-3
-*   @Description: 单片机程序动态加载的平台文件，主要实现重定位时，对机器码的更改
-*   @Todo	目前仅支持arm平台
+*   @file dl_arch.c
+*   @author wzh
+*   @version: 1.0
+*   @date  2021-12-3
+*   @description 单片机程序动态加载的平台文件，主要实现重定位时，对机器码的更改
+*   @brief	目前仅支持arm平台
 */
 #include "dl_lib.h"
 #include "dl_elf.h"
