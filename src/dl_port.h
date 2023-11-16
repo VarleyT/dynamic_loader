@@ -1,10 +1,10 @@
 /*
-*   @File name: dl_port.h
-*   @Author: wzh
-*   @Version: 1.0
-*   @Date: 2021-12-3
-*   @Description: 实现单片机程序动态加载，类似WIndows的dll
-*   @Todo	与硬件相关的底层函数接口
+*   @file  dl_port.h
+*   @author  wzh
+*   @version  1.0
+*   @date  2021-12-3
+*   @description  实现单片机程序动态加载，类似WIndows的dll
+*   @detail	与硬件相关的底层函数接口
 */
 #ifndef DL_PORT_H__
 #define DL_PORT_H__
