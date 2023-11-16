@@ -1,10 +1,10 @@
 /*
-*   @File name: dl_elf.h
-*   @Author: wzh
-*   @Version: 1.0
-*   @Date: 2021-12-3
-*   @Description: elf文件格式描述
-*   @Todo	移植自RT-Thread的动态加载模块的实现，主要用于解码elf文件
+*   @file name: dl_elf.h
+*   @author: wzh
+*   @version: 1.0
+*   @date: 2021-12-3
+*   @description: elf文件格式描述
+*   @brief	移植自RT-Thread的动态加载模块的实现，主要用于解码elf文件
 */
 
 #ifndef DL_ELF_H__
