@@ -1,10 +1,10 @@
 /*
-*   @File name: dl_lib.h
-*   @Author: wzh
-*   @Version: 1.0
-*   @Date: 2021-12-3
-*   @Description: 实现单片机程序动态加载，类似WIndows的dll
-*   @Todo	具体使用方法如下
+*   @file dl_lib.h
+*   @author wzh
+*   @version 1.0
+*   @date 2021-12-3
+*   @description: 实现单片机程序动态加载，类似WIndows的dll
+*   @detail	具体使用方法如下
 *         1、首先确定好自己的硬件平台是否适配，目前本程序仅使用了Coretex-M7内核的
 *            STMH743单片机进行测试，理论上arm的Coretex-M系列可以直接使用，其他的arm系列
 *            芯片可能在重定位指令与Cache的支持的不够好，下面假设使用的是Coretex-M系列芯片
