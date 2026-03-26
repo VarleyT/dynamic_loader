@@ -1,5 +1,7 @@
 # dynamic_loader
 
+> **声明：本项目拷贝自 [gitee.com/wzh1845462801/dynamic_loader](https://gitee.com/wzh1845462801/dynamic_loader)，基于 GPL v2 协议分发。**
+
 #### 介绍
 本项目是一个在单片机（如：STM32）上实现动态加载功能的函数库，与Windows中的dll，Linux中的so类似，可以将代码动态地从其他的存储介质，动态加载到RAM中
 
