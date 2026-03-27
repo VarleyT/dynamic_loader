@@ -90,9 +90,35 @@ static __attribute__((used))
 
 void* svc_dl_vector_get_lib_func_entry(size_t index){
 	if(index<sizeof(DL_Vector_Table)/sizeof(DL_Vector_Table[0])){
-		return DL_Vector_Table[index];
+		uintptr_t addr = (uintptr_t)DL_Vector_Table[index];
+		/*
+		 * Cortex-M only supports Thumb state. BLX target address bit0 must be 1
+		 * for function entries; otherwise it can HardFault on branch.
+		 * Keep stdio stream objects as raw data pointers.
+		 */
+		if(index != (DL_STDIO_LIB_BASE + STDIN) &&
+		   index != (DL_STDIO_LIB_BASE + STDOUT) &&
+		   index != (DL_STDIO_LIB_BASE + STDERR)){
+			addr |= 1u;
+		}
+		return (void*)addr;
 	}
 	else
 		return NULL;
 }
 
+
+/**
+ * @brief SVC 逻辑分发器
+ * @param svc_args 指向硬件压栈后的起始地址 (R0 传入)
+ */
+void SVC_Handler_Main(uint32_t *svc_args) {
+    // Hardware stack frame: R0, R1, R2, R3, R12, LR, PC, xPSR
+    uint8_t *pc = (uint8_t *)(svc_args[6] & (~1u));
+    uint8_t svc_num = pc[-2];
+    if (svc_num == 8) {
+        size_t index = (size_t)svc_args[0];
+        // Write return value back to stacked R0.
+        svc_args[0] = (uint32_t)svc_dl_vector_get_lib_func_entry(index);
+    }
+}

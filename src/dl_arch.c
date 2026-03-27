@@ -84,6 +84,7 @@ DL_Err_Type dl_relocate(DL_Handler *pHandle, Elf32_Rel *rel, Elf32_Addr sym_addr
     where = (Elf32_Addr *)((uint8_t *)pHandle->mem_ptr
                            + rel->r_offset
                            - pHandle->vstart_addr);
+    
 	//where 要更改的地址
 	//sym_addr 符号的地址
     switch (ELF32_R_TYPE(rel->r_info))
@@ -92,7 +93,7 @@ DL_Err_Type dl_relocate(DL_Handler *pHandle, Elf32_Rel *rel, Elf32_Addr sym_addr
         break;
     case R_ARM_ABS32:
         *where += (Elf32_Addr)sym_addr;
-        DL_LOG_D("R_ARM_ABS32: %x -> %x",
+        DL_LOG_D("R_ARM_ABS32: %x -> %x\r\n",
                                        (uint32_t)where, *where);
         break;
     case R_ARM_PC24:
@@ -107,13 +108,13 @@ DL_Err_Type dl_relocate(DL_Handler *pHandle, Elf32_Rel *rel, Elf32_Addr sym_addr
         tmp = sym_addr - (Elf32_Addr)where + (addend << 2);
         tmp >>= 2;
         *where = (*where & 0xff000000) | (tmp & 0x00ffffff);
-        DL_LOG_D("R_ARM_PC24: %x -> %x",
+        DL_LOG_D("R_ARM_PC24: %x -> %x\r\n",
                                        (uint32_t)where, *where);
 	}
         break;
     case R_ARM_REL32:
         *where += sym_addr - (Elf32_Addr)where;
-        DL_LOG_D("R_ARM_REL32: %x -> %x, sym %x, offset %x",
+        DL_LOG_D("R_ARM_REL32: %x -> %x, sym %x, offset %x\r\n",
                       (uint32_t)where, *where, sym_addr, rel->r_offset);
         break;
     case R_ARM_V4BX:
@@ -138,7 +139,7 @@ DL_Err_Type dl_relocate(DL_Handler *pHandle, Elf32_Rel *rel, Elf32_Addr sym_addr
 
     case R_ARM_RELATIVE:
         *where = (Elf32_Addr)sym_addr + *where;
-        DL_LOG_D("R_ARM_RELATIVE: 0x%x -> 0x%x 0x%x",
+        DL_LOG_D("R_ARM_RELATIVE: 0x%x -> 0x%x 0x%x\r\n",
                                        (uint32_t)where, *where, sym_addr);
         break;
     case R_ARM_THM_CALL:
@@ -164,7 +165,7 @@ DL_Err_Type dl_relocate(DL_Handler *pHandle, Elf32_Rel *rel, Elf32_Addr sym_addr
             offset <= (int32_t)0xff000000 ||
             offset >= (int32_t)0x01000000)
         {
-            DL_LOG_E("Module: Only Thumb addresses allowed");
+            DL_LOG_E("Module: Only Thumb addresses allowed\r\n");
 
             return DL_RELOCATE_ERR;
         }
@@ -184,7 +185,7 @@ DL_Err_Type dl_relocate(DL_Handler *pHandle, Elf32_Rel *rel, Elf32_Addr sym_addr
         break;
 	case R_ARM_THM_MOVW_ABS_NC:{
 		uint32_t tmp;
-		DL_LOG_D("MOVW_ABS_NC:sym_addr:0x%08x,*sym_addr:0x%08x",sym_addr,*(uint32_t*)sym_addr);
+		DL_LOG_D("MOVW_ABS_NC:sym_addr:0x%08x,*sym_addr:0x%08x\r\n",sym_addr,*(uint32_t*)sym_addr);
 		tmp=*(uint32_t*)where;
 		tmp=(tmp>>16)|(tmp<<16);//高低位互换
 		tmp&=0xFBF08F00;//对原址[19:16],[26],[14:12],[7:0]清0
@@ -196,13 +197,13 @@ DL_Err_Type dl_relocate(DL_Handler *pHandle, Elf32_Rel *rel, Elf32_Addr sym_addr
 		tmp|=((sym_addr>>8 )&0x7)<<12;//tmp[14:12]=(sym_addr>>8 )&0x7;
 		tmp|=sym_addr&0xff;//tmp[7:0]=sym_addr&0xff
 		tmp=(tmp>>16)|(tmp<<16);//高低位互换
-		DL_LOG_D("MOVW_ABS_NC:where:%p,*where:0x%08x,tmp:%08x",where,*where,tmp);
+        DL_LOG_D("MOVW_ABS_NC:where:%p,*where:0x%08x,tmp:%08x\r\n",where,*where,tmp);
 		*(uint32_t*)where=tmp;
 	}
 		break;
 	case R_ARM_THM_MOVT_ABS:{
 		uint32_t tmp;
-		DL_LOG_D("R_ARM_THM_MOVT_ABS:sym_addr:0x%08x,*sym_addr:0x%08x",sym_addr,*(uint32_t*)sym_addr);
+		DL_LOG_D("R_ARM_THM_MOVT_ABS:sym_addr:0x%08x,*sym_addr:0x%08x\r\n",sym_addr,*(uint32_t*)sym_addr);
 		tmp=*(uint32_t*)where;
 		tmp=(tmp>>16)|(tmp<<16);//高低位互换
 		tmp&=0xFBF08F00;//对原址[19:16],[26],[14:12],[7:0]清0
@@ -212,7 +213,7 @@ DL_Err_Type dl_relocate(DL_Handler *pHandle, Elf32_Rel *rel, Elf32_Addr sym_addr
 		tmp|=((sym_addr>>24)&0x7)<<12;//tmp[14:12]=(sym_addr>>24)&0x7;
 		tmp|=(sym_addr>>16)&0xff;//tmp[7:0]=(sym_addr>>16)&0xff
 		tmp=(tmp>>16)|(tmp<<16);//高低位互换
-		DL_LOG_D("MOVT_ABS:where:%p,*where:0x%08x,tmp:%08x",where,*where,tmp);
+        DL_LOG_D("MOVT_ABS:where:%p,*where:0x%08x,tmp:%08x\r\n",where,*where,tmp);
 		*(uint32_t*)where=tmp;
 	}
 		break;
