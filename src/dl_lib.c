@@ -83,7 +83,7 @@ DL_Err_Type dl_load_lib(DL_Handler* pHandle,const void* const lib_ptr){
 	//根据加载区大小分配内存
 	pHandle->mem_size=vend_addr-vstart_addr;
 	pHandle->vstart_addr=vstart_addr;
-	DL_LOG_D("module size: %d, vstart_addr: 0x%p", pHandle->mem_size, (void*)vstart_addr);
+	DL_LOG_D("module size: %d, vstart_addr: 0x%p\r\n", pHandle->mem_size, (void*)vstart_addr);
 	if(pHandle->mem_size==0){
 		DL_LOG_E("Module: size error\n");
 		err=DL_MEMSIZE_ERR;
@@ -91,7 +91,7 @@ DL_Err_Type dl_load_lib(DL_Handler* pHandle,const void* const lib_ptr){
 	}
 	pHandle->mem_ptr=dl_port_aligned_alloc(max_align,pHandle->mem_size);
 	if(pHandle->mem_ptr==NULL){
-		DL_LOG_E("Module: allocate space failed.");
+		DL_LOG_E("Module: allocate space failed.\r\n");
 		err=DL_MALLOC_FAIL;
         goto fail0;
 	}
@@ -135,7 +135,7 @@ DL_Err_Type dl_load_lib(DL_Handler* pHandle,const void* const lib_ptr){
 			extern DL_Err_Type dl_relocate(DL_Handler *pHandle, Elf32_Rel *rel, Elf32_Addr sym_val);
             Elf_Sym *sym = &symtab[ELF32_R_SYM(rel[j].r_info)];
 			
-			DL_LOG_D("relocate symbol %s shndx %d", strtab + sym->st_name, sym->st_shndx);
+			DL_LOG_D("relocate symbol %s shndx %d\r\n", strtab + sym->st_name, sym->st_shndx);
 			if ((sym->st_shndx != SHT_NULL) ||(ELF_ST_BIND(sym->st_info) == STB_LOCAL)){//如果符号可以解析
                 Elf_Addr addr;
 
@@ -147,7 +147,7 @@ DL_Err_Type dl_load_lib(DL_Handler* pHandle,const void* const lib_ptr){
             }
             else{//从外部导入符号
 				 //由于编译器原因暂不支持
-				DL_LOG_E("Module: can't find %s in kernel symbol table", strtab + sym->st_name);
+				DL_LOG_E("Module: can't find %s in kernel symbol table\r\n", strtab + sym->st_name);
 				err=DL_UNDEF_SYM_ERR;
 				goto fail1;
             }
@@ -329,5 +329,47 @@ DL_Err_Type dl_exec_file(const char* file_name,int argc,char* argv[],int* ret){
 		return DL_ELF_NO_ENTRY;
 	}
 }
+
+/**
+ * @brief 获取库中的函数名
+ * @param pHandle：句柄
+ * @param idx：函数索引。为 -1 时，从内部记录的位置依次获取下一个；>= 0 时，获取指定位置。
+ * @return const char* 函数名（返回 NULL 表示超出索引范围或未找到）
+ */
+const char* dl_get_func_name(DL_Handler* pHandle, int idx) {
+    // 资深提示：在多插件环境下，建议将 s_idx 放入 DL_Handler 结构体中以实现重入
+    static int s_internal_idx = 0; 
+    int total = pHandle->nsym;
+    int target_idx;
+
+    if (pHandle == NULL || total <= 0) {
+        return NULL;
+    }
+
+    if (idx < 0) {
+        // 自动迭代模式
+        target_idx = s_internal_idx;
+    } else {
+        // 指定索引模式
+        target_idx = idx;
+        // 如果用户手动指定了索引，通常建议同步更新内部计数器，以便下次 -1 调用能衔接
+        s_internal_idx = idx; 
+    }
+
+    // 边界检查
+    if (target_idx < 0 || target_idx >= total) {
+        s_internal_idx = 0; // 遍历结束，复位内部计数器
+        return NULL;
+    }
+
+    // 更新内部计数器供下一次 -1 调用使用
+    s_internal_idx = target_idx + 1;
+
+    // 返回符号表中对应的名称
+    // 注意：pHandle->symtab[target_idx].name 必须在重定位后依然有效
+    return pHandle->symtab[target_idx].name;
+}
+
+
 #endif
 

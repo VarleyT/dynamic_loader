@@ -65,6 +65,7 @@ DL_Err_Type dl_load_lib(DL_Handler* pHandle,const void* const lib_ptr);
 void* dl_get_func(DL_Handler* pHandle,const char* sys_name);
 int(*dl_get_entry(DL_Handler* pHandle))(int argc, char *argv[]);
 void dl_destroy_lib(DL_Handler* pHandle);
+const char* dl_get_func_name(DL_Handler* pHandle, int idx);
 
 DL_Err_Type dl_load_file(DL_Handler* pHandle,const char* file_name);
 DL_Err_Type dl_exec_file(const char* file_name,int argc,char* argv[],int* ret);
